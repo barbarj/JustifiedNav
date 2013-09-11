@@ -1,0 +1,94 @@
+/*General style tweaks*/
+html {
+	font-size: 16px;
+}
+
+a {
+	color: #3FA9F5;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #3FA9F5;
+}
+
+#container{
+	max-width: 960px;
+}
+
+/*Nav style tweaks*/
+.main-nav,
+.main-nav .menu,
+ul.menu > li:hover {
+	background: transparent;
+}
+
+.page_item a,
+.menu li a {
+	background-color: #808080;
+}
+
+.front-page .menu .current_page_item a,
+.menu .current_page_item a,
+.page_item a::selection,
+.menu a:hover {
+	background-color: #3FA9F5;
+	background-image: none;
+	text-decoration: none;
+}
+
+.current_page_item a,
+.page_item a,
+.menu li a {
+	border: none;
+	margin: 0 10px 10px 0;
+	padding: 10px 20px;
+	text-shadow: none;
+	font-size: 1rem;
+	line-height: 1rem;
+	text-transform: capitalize;
+	height: auto;
+}
+
+.menu ul {
+	min-width: 0;
+}
+
+.menu li {
+	list-style: none;
+	float: left;
+	height: 46px;
+}
+
+.menu li li {
+  background: #808080;
+  border: none;
+  color: #fff;
+  margin: -9px 0 0 0;
+  width: auto;
+}
+
+.menu li li a {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 300;
+  height: auto;
+  line-height: 1rem;
+  padding: 10px 20px;
+  width: auto;
+}
+
+.menu li li a:hover {
+  background: #3FA9F5!important;
+  color: #fff;
+}
+
+.menu li li:hover {
+  background: #3FA9F5!important;
+}
+
+.front-page #wrapper {
+	margin-top: 0;
+	margin-bottom: 0;
+}
