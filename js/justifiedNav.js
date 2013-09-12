@@ -60,23 +60,53 @@ function stretchRows( menu ) {
 	var $rows = $( createRows( menu ) );
 
 	$.each( $rows, function( key, value ) {
-		var $thisRow = $( this );
-		$thisRow[ $thisRow.length -1 ].css( 'margin-right', '0' );
+		if( key != $rows.length - 1 ) {
+			var $thisRow = $( this );
 
-		//find widthToAdd by finding the differce between this row's width and the container width and dividing by 2, then rounding down to avoid any decimals.
-		var widthToAdd = Math.floor( ( $( menu ).width() - $thisRow.rowWidth ) / 2 );
+			$thisRow[ $thisRow.length -1 ].css( 'margin-right', '0' );
 
-		$.each( $thisRow, function() {
-			var $this = $( this );
+			//find widthToAdd by finding the differce between this row's width and the container width and dividing by the number of items in the row, and then by 2, then rounding down to avoid any decimals.
+			//must use "this" as apposed to "$this" when using rowWidth because rowWidth property does not transfer over when converted to a jQuery object
 
-			//add paddings together and divide by 2, so that in all cases, left and right padding will be the same, then remove the 'px' so we can do math with it.
-			//this is also where the jquery.sizes plugin comes in.
-			var currentPadding = (parseInt( $this.padding( 'left' ) ) + parseInt( $this.padding( 'right' ) ) ) / 2; 
-			console.log( $this.padding().left );
-
-			//var newPadding = currentPadding + widthToAdd;
-		});
+			addPadding( menu, this.rowWidth, $thisRow );
+		}
 
 
+	});
+}
+
+function addPadding( menu, rowWidth, $thisRow ) {
+	var widthToAdd = Math.floor( ( ( $( menu ).width() - rowWidth ) / $thisRow.length ) /  2 );
+
+	$.each( $thisRow, function() {
+		var $this = $( this );
+
+		//add paddings together and divide by 2, so that in all cases, left and right padding will be the same, then remove the 'px' so we can do math with it.
+		//this is also where the jquery.sizes plugin comes in.
+		var currentPadding = ( $this.padding().left + $this.padding().right ) / 2; 
+		var newPadding = ( currentPadding + widthToAdd ) + "px";
+
+		$this.css( 'padding-left',  newPadding ).css( 'padding-right', newPadding );
+	});
+	var newWidth = rowWidth + ( widthToAdd * $thisRow.length * 2 );
+	var difference = $( menu ).width() - newWidth;
+
+	//iterate through each element in the row and add a pixel to both sides of the padding. Once difference hits one, add that pixel to the padding-right of the current element and force break from the each loop by returning false.
+	$.each( $thisRow, function() {
+		var $this = $( this );	
+
+		//add paddings together and divide by 2, so that in all cases, left and right padding will be the same, then remove the 'px' so we can do math with it.
+		//this is also where the jquery.sizes plugin comes in.
+		currentPadding = ( $this.padding().left + $this.padding().right ) / 2; 
+		newPadding = ( currentPadding + 1 ) + "px";
+
+		if( difference > 1 ) {
+			$this.css( 'padding-left',  newPadding ).css( 'padding-right', newPadding );
+			difference -= 2;
+		}
+		else {
+			$this.css( 'padding-right', newPadding );
+			return false;
+		}
 	});
 }
