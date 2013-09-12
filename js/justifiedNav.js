@@ -1,15 +1,9 @@
-//Get the width of the menu we are dealing with
-// String -> Natural
-function findWrapperWidth( menu ) {
-	return $(menu).width();
-}
-
 //create an array of rows of items in the given menu
 // String -> Array
 function createRows( menu ) {
 	//create necessary initial variables
 	var rows = []
-	var maxRowWidth = findWrapperWidth( menu );
+	var maxRowWidth = $( menu ).width();
 	var $menuItems = $( menu + ' li a');
 
 	//the variable used in the .each function below to keep track of the width of our current row.
@@ -58,4 +52,31 @@ function createRows( menu ) {
 	});
 
 	return rows;
+}
+
+//stretch the rows in the given menu to the full width of the menu container
+//String -> Boolean
+function stretchRows( menu ) {
+	var $rows = $( createRows( menu ) );
+
+	$.each( $rows, function( key, value ) {
+		var $thisRow = $( this );
+		$thisRow[ $thisRow.length -1 ].css( 'margin-right', '0' );
+
+		//find widthToAdd by finding the differce between this row's width and the container width and dividing by 2, then rounding down to avoid any decimals.
+		var widthToAdd = Math.floor( ( $( menu ).width() - $thisRow.rowWidth ) / 2 );
+
+		$.each( $thisRow, function() {
+			var $this = $( this );
+
+			//add paddings together and divide by 2, so that in all cases, left and right padding will be the same, then remove the 'px' so we can do math with it.
+			//this is also where the jquery.sizes plugin comes in.
+			var currentPadding = (parseInt( $this.padding( 'left' ) ) + parseInt( $this.padding( 'right' ) ) ) / 2; 
+			console.log( $this.padding().left );
+
+			//var newPadding = currentPadding + widthToAdd;
+		});
+
+
+	});
 }
