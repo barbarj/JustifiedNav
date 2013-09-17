@@ -1,5 +1,3 @@
-//writing the findNewPadding function
-
 //DEFINE OUR CLASSES
 
 //jQuery object -> object
@@ -8,7 +6,6 @@ function item( element ) {
 	this.element = $(element);
 	this.padding = ( this.element.padding().left + this.element.padding().right ) / 2;
 	this.outer = true;
-	this.lastInRow = false;
 }
 
 // nothing -> object
@@ -80,6 +77,9 @@ function row( containerWidth ) {
 	this.findNewPadding = function() {
 		var currentPadding = this.items[0].padding;
 		var newPadding = currentPadding + this.addedPadding;
+		$.each(this.items, function() {
+			this.padding = newPadding;
+		});
 		while( this.leftovers > 1 ) {
 			var i = 0;
 			while( i < this.items.length && this.leftovers > 1 ) {
@@ -88,6 +88,7 @@ function row( containerWidth ) {
 				i++;
 			}
 		}
+		return true;
 	}
 
 	//jquery object -> nothing
@@ -151,7 +152,6 @@ function rowBuilder( container ) {
 				this.findNewPadding();
 				this.setPadding();
 				this.items[ this.items.length - 1 ].element.css( 'padding-right', (this.leftovers + this.items[ this.items.length - 1 ].padding ) + "px" ).css( 'margin-right', '0' );
-
 			}
 		});
 		return true;

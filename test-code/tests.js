@@ -133,7 +133,6 @@
 // 	ok( newItem, 'object' );
 // 	deepEqual( newItem.element, $(element), '.element' );
 // 	equal( newItem.padding, 20 );
-// 	strictEqual( newItem.lastInRow, false, 'lastInRow' );
 // 	strictEqual( newItem.outer, true, 'outer' );
 // });
 
