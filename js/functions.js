@@ -1,3 +1,7 @@
+//Need to bring over the browser conditional manipulation of the rowContainerWidth variable in the row class.
+//define the adjustments as variables to be set depending on the menu. (possibly on run tests to automatically set the adjustments sonehow. Less that must be configured, the better.)
+//also, change into switch statement
+
 //DEFINE OUR CLASSES
 
 //jQuery object -> object
