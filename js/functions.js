@@ -179,3 +179,8 @@ function justifiedNav( container ) {
 
 	return true;
 }
+
+//clear all styles out of the given block of the DOM
+function clearStyles( container ) {
+	$( container ).find('*').removeAttr('style');
+};
